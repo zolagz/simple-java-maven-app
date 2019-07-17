@@ -1,8 +1,9 @@
 pipeline {
     agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /root/.m2:/root/.m2' 
+        stage("maven-build") {
+	sh '''
+           mvn -Dmaven.test.failure.ignore clean package
+        '''
         }
     }
     stages {
